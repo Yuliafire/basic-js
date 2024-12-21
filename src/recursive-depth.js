@@ -1,8 +1,7 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
 /**
- * Implement class DepthCalculator with method calculateDepth
- * that calculates deoth of nested array
+ 
  * 
  * @example
  * 
@@ -13,9 +12,25 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class DepthCalculator {
-  calculateDepth(/* arr */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  calculateDepth( arr ) {
+    if (!Array.isArray(arr)) {
+      throw new Error('Input must be an array');
+    }
+    if (arr.length === 1) {
+      return 1;
+    }
+    let maxDepth = 1;
+
+    for (let element of arr) {
+      if (Array.isArray(element)) {
+        const depth = this.calculateDepth(element);
+        if (depth + 1 > maxDepth) {
+          maxDepth  = depth + 1;
+        }
+      }
+    }
+
+   return maxDepth;
   }
 }
 
