@@ -14,9 +14,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  * calculateHanoi(9, 4308) => { turns: 511, seconds: 427 }
  *
  */
-function calculateHanoi(/* disksNumber, turnsSpeed */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+
+
+// Math.pow(base, exponent)
+// base: This is the number that you want to raise to a power.
+// exponent: This is the power to which the base number is raised.rff
+
+
+function calculateHanoi(disksNumber, turnsSpeed) {
+   const turns = Math.pow(2, disksNumber) - 1;
+   const turnsPerSecond = turnsSpeed / 3600;
+   const seconds = Math.floor(turns / turnsPerSecond);
+
+   return {
+    turns: turns,
+    seconds: seconds
+   };
 }
 
 module.exports = {
