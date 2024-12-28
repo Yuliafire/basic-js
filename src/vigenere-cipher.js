@@ -36,6 +36,7 @@ class VigenereCipheringMachine {
      this.isDirect = isDirect;
   }
   encrypt(message, key) {
+    // if (arguments.length < 2) throw new Error('Incorrect arguments');
     if (!message || !key) throw new Error('Incorrect arguments');
       message = message.toUpperCase();
       key = key.toUpperCase();
@@ -67,7 +68,7 @@ class VigenereCipheringMachine {
     let result = '';
     let keyIndex = 0;
 
-    //iterate each character in the message 
+    //iterate each character in the message
     for (let i = 0; i < message.length; i++) {
       if (message[i] >= 'A' && message[i] <= 'Z') {
         const messageCharCode  = message.charCodeAt(i);

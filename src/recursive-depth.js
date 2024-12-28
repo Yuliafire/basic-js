@@ -11,25 +11,28 @@ const { NotImplementedError } = require('../extensions/index.js');
  * depthCalc.calculateDepth([[[]]]) => 3
  *
  */
+// use cases: 
+// Data Validation:
+// File System Analysis:
+// UI Component Trees:
+// XML/HTML Parsing:
+
 class DepthCalculator {
   calculateDepth( arr ) {
     if (!Array.isArray(arr)) {
       throw new Error('Input must be an array');
     }
-    if (arr.length === 1) {
-      return 1;
-    }
+  
     let maxDepth = 1;
 
     for (let element of arr) {
       if (Array.isArray(element)) {
         const depth = this.calculateDepth(element);
         if (depth + 1 > maxDepth) {
-          maxDepth  = depth + 1;
+          maxDepth = depth + 1;
         }
       }
     }
-
    return maxDepth;
   }
 }
