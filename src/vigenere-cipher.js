@@ -67,9 +67,20 @@ class VigenereCipheringMachine {
     let result = '';
     let keyIndex = 0;
 
-    
+    //iterate each character in the message 
+    for (let i = 0; i < message.length; i++) {
+      if (message[i] >= 'A' && message[i] <= 'Z') {
+        const messageCharCode  = message.charCodeAt(i);
+        const keyCharCode = key.charCodeAt(keyIndex % key.length);
+        const decryptedCharCode = ((messageCharCode - 65 - (keyCharCode - 65) + 26) % 26) + 65;
+        result += String.fromCharCode(decryptedCharCode);
+        keyIndex++;
+      } else {
+        result += message[i];
+      }
+    }
 
-
+     return this.isDirect ? result : result.split(''). reverse().join('');
   }
 }
 
