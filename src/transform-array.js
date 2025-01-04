@@ -15,32 +15,29 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function transform(arr) {
   if (!Array.isArray(arr)) {
-    throw new Error("Input must be an array");
+    throw new Error("'arr' parameter must be an instance of the Array!");
   }
-
+  const arrCopy = [...arr];
   const result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === '--double-next') {
-      if (i + 1 < arr.length) {
-        result.push(arr[i + 1]);
-      }
-    } else if (arr[i] === '--discard-prev') {
-      if (result.length > 0 && arr[i - 1] !== '--discard-next') {
-        result.pop();
-      }
-    } else if (arr[i] === '--discard-next') {
-      if (i + 1 < arr.length) {
-        i++; // Skip the next element
-      }
-    } else if (arr[i] === '--double-prev') {
-      if (i - 1 >= 0 && arr[i - 2] !== '--discard-next') {
-        result.push(arr[i - 1]);
-      }
-      result.push(arr[i]);
-    } else {
-      result.push(arr[i]);
+
+  arrCopy.forEach((element, i) => {
+    switch (element) {
+      case '--discard-next':
+        arrCopy[i + 1] ? arrCopy.splice(i, 2, null) : null;
+        break;
+      case '--discard-prev':
+        arrCopy[i - 1] ? result.pop() : null;
+        break;
+      case '--double-next':
+        arrCopy[i + 1] ? result.push(arrCopy[i + 1]) : null;
+        break;
+      case '--double-prev':
+        arrCopy[i - 1] ? result.push(arrCopy[i - 1]) : null;
+        break;
+      default:
+          result.push(element);
     }
-  }
+  });
   return result;
 }
 
