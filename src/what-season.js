@@ -7,34 +7,25 @@ const { NotImplementedError } = require('../extensions/index.js');
  * @returns {String} time of the year
  * 
  * @example
- * 
+ *
  * getSeason(new Date(2020, 02, 31)) => 'spring'
- * 
+ *
  */
 function getSeason(date) {
 
-  // check if the date argument is absent
-  if (date === undefined) {
+  if (date === null || date == undefined) {
     return "Unable to determine the time of year!";
   }
 
-  // check if the date is valid
-  if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+  if (!(date instanceof Date) || Object.getOwnPropertyNames(date).length) {
     throw new Error('Invalid date!');
   }
-  const month  = date.getMonth();
-  let season = "";
 
-  if (month === 11 || month === 0 || month === 1) {
-    season = 'winter';
-  } else if (month >= 2 && month <= 4) {
-    season = 'spring';
-  } else if (month >= 5 && month <= 7) {
-    season = 'summer'
-  } else  {
-    season = 'autumn';
-  }
-  return season;
+  const seasons  = ['winter', 'winter', 'spring', 'spring', 'spring', 'summer', 'summer', 'summer', 'fall', 'fall', 'fall', 'winter'];
+
+  let monthIndex = date.getMonth();
+
+  return seasons[monthIndex];
 }
 
 module.exports = {
